@@ -1,0 +1,10 @@
+trash:
+  enable_trash_cli: true
+vim:
+  enable_vim: true
+ripgrep:
+  enable_ripgrep: true
+security_hardening:
+  enable_security_hardening: true
+clamav:
+  enable_clamav: false

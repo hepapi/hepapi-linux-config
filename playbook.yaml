@@ -1,0 +1,9 @@
+---
+- name: Hepapi Linux Config
+  hosts: ec2_server
+  become: yes
+  roles:
+    - ubuntu
+  vars_files:
+    - group_vars/main.yaml
+

@@ -1,0 +1,42 @@
+  - name: Update and upgrade apt packages
+    apt:
+      upgrade: yes
+      update_cache: yes 
+      cache_valid_time: 86400 
+  
+  - name: Trash-cli install on the machine
+    apt:
+      name: trash-cli
+      state: latest
+    when: trash.enable_trash_cli
+
+  - name: Trash-cli add to .bashrc
+    lineinfile:
+        path: ~/.bashrc
+        line: "alias rm='trash'"
+        state: present
+        insertafter: EOF
+    when: trash.enable_trash_cli
+
+  - name: update to .bashrc file
+    command: "bash -c 'source ~/.bashrc'"
+    when: trash.enable_trash_cli
+
+  - name: Clone github to .vimrc
+    get_url:
+      url: "{{vimrcFileLocation}}"
+      dest: ~/.vimrc
+    when: vim.enable_vim
+
+  - name: RipGrep install on the machine
+    apt:
+      name: ripgrep
+      state: latest
+    when: ripgrep.enable_ripgrep
+
+  - name: ClamAv malware scanner install on the machine
+    apt:
+      name: clamav
+      state: latest
+    when: clamav.enable_clamav
+
